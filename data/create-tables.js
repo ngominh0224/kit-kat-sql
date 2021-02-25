@@ -20,6 +20,7 @@ async function run() {
                     id SERIAL PRIMARY KEY NOT NULL,
                     name VARCHAR(512) NOT NULL,
                     description VARCHAR(512) NOT NULL,
+                    category VARCHAR(512) NOT NULL,
                     is_flavored BOOLEAN NOT NULL,
                     size VARCHAR(512) NOT NULL, 
                     price INTEGER NOT NULL,

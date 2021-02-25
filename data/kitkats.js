@@ -1,8 +1,8 @@
-module.exports = [
+const kitkats = [
   {
     name: 'Kit-Kat',
     description: 'Milk Chocolate Wafers',
-    // category: 'classic',
+    category: 'classic',
     is_flavored: false,
     size: 'Regular',
     price: 1,
@@ -10,7 +10,7 @@ module.exports = [
   {
     name: 'King-Size-Kit-Kat',
     description: 'Milk Chocolate Wafers',
-    // category: 'classic',
+    category: 'classic',
     is_flavored: false,
     size: 'King',
     price: 2,
@@ -18,7 +18,7 @@ module.exports = [
   {
     name: 'Dark-Kit-Kat',
     description: 'Dark Chocolate Wafers',
-    // category: 'unique',
+    category: 'unique',
     is_flavored: true,
     size: 'Regular',
     price: 1,
@@ -26,7 +26,7 @@ module.exports = [
   {
     name: 'King-Size-Dark-Kit-Kat',
     description: 'Dark Chocolate Wafers',
-    // category: 'unique',
+    category: 'unique',
     is_flavored: true,
     size: 'King',
     price: 2,
@@ -34,7 +34,7 @@ module.exports = [
   {
     name: 'Matcha Kit-Kat',
     description: 'Matcha Chocolate Wafers',
-    // category: 'unique',
+    category: 'unique',
     is_flavored: true,
     size: 'Regular',
     price: 1,
@@ -42,9 +42,13 @@ module.exports = [
   {
     name: 'Matcha Kit-Kat',
     description: 'Matcha Chocolate Wafers',
-    // category: 'unique',
+    category: 'unique',
     is_flavored: true,
     size: 'King',
     price: 2,
   },
 ];
+
+module.exports = {
+  kitkats,
+};

@@ -1,6 +1,6 @@
 const client = require('../lib/client');
 // import our seed data:
-const kitkats = require('./kitkats.js');
+const { kitkats } = require('./kitkats.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
 
@@ -26,18 +26,20 @@ async function run() {
     const user = users[0].rows[0];
 
     await Promise.all(
-      kitkats.map((kitkats) => {
+      kitkats.map((kitkat) => {
         return client.query(
           `
-                    INSERT INTO kitkats (name, description, is_flavored, size, price, owner_id)
-                    VALUES ($1, $2, $3, $4, $5, $6);
+                    INSERT INTO kitkats (name, description,
+                    category, is_flavored, size, price, owner_id)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7);
                 `,
           [
-            kitkats.name,
-            kitkats.description,
-            kitkats.is_flavored,
-            kitkats.size,
-            kitkats.price,
+            kitkat.name,
+            kitkat.description,
+            kitkat.category,
+            kitkat.is_flavored,
+            kitkat.size,
+            kitkat.price,
             user.id,
           ]
         );
