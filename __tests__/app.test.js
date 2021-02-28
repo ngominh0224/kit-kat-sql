@@ -120,5 +120,39 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
+
+test('creates new kit-kat and new kit-kat is in our list', async () => {
+      const newKitKat = {
+        name: 'Strawberry Kit-Kat',
+        description: 'Strawberry chocolate wafers',
+        category: 'unique',
+        is_flavored: true,
+        size: 'regular',
+        price: 1
+      };
+
+      const expectedKitKat = {
+        ...newKitKat,
+        id: 7,
+        owner_id: 1,
+      };
+
+      const data = await fakeRequest(app)
+        .post('/kitkats')
+        .send(newKitKat)
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectedKitKat);
+
+      const allKitKats = await fakeRequest(app)
+        .get('/kitkats')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      const strawberryKitKat = allKitKats.body.find(kitkat => kitkat.name === 'Strawberry Kit-Kat')
+
+      expect(strawberryKitKat).toEqual(expectedKitKat);
+    });
   });
 });
