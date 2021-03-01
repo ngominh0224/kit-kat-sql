@@ -101,31 +101,31 @@ describe('app routes', () => {
 
       const data = await fakeRequest(app)
         .get('/kitkats')
-        .expect('Content-Type', /json/);
+        .expect('Content-Type', /json/)
         .expect(200);
 
       expect(data.body).toEqual(expect.arrayContaining(expectation));
     });
 
-    // test('returns the first data item', async () => {
-    //   const expectation = {
-    //     id: 1,
-    //     name: 'Kit-Kat',
-    //     description: 'Milk Chocolate Wafers',
-    //     category: 'classic',
-    //     is_flavored: false,
-    //     size: 'Regular',
-    //     price: 1,
-    //     owner_id: 1,
-    //   };
+    test('returns the first data item', async () => {
+      const expectation = {
+        id: 1,
+        name: 'Kit-Kat',
+        description: 'Milk Chocolate Wafers',
+        category: 'classic',
+        is_flavored: false,
+        size: 'Regular',
+        price: 1,
+        owner_id: 1,
+      };
 
-    //   const data = await fakeRequest(app)
-    //     .get('/kitkats/1')
-    //     .expect('Content-Type', /json/)
-    //     .expect(200);
+      const data = await fakeRequest(app)
+        .get('/kitkats/1')
+        .expect('Content-Type', /json/)
+        .expect(200);
 
-    //   expect(data.body).toEqual(expectation);
-    // });
+      expect(data.body).toEqual(expectation);
+    });
 
     // test('creates new kit-kat and new kit-kat is in our list', async () => {
     //   const newKitKat = {
