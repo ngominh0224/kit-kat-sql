@@ -15,12 +15,18 @@ async function run() {
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
-                );           
+                );
+                
+                CREATE TABLE categories (
+                  id SERIAL PRIMARY KEY NOT NULL,
+                  name VARCHAR(512) NOT NULL
+              );    
+                
                 CREATE TABLE kitkats (
                     id SERIAL PRIMARY KEY NOT NULL,
                     name VARCHAR(512) NOT NULL,
                     description VARCHAR(512) NOT NULL,
-                    category VARCHAR(512) NOT NULL,
+                    category_id INTEGER NOT NULL REFERENCES categories(id),
                     is_flavored BOOLEAN NOT NULL,
                     size VARCHAR(512) NOT NULL, 
                     price INTEGER NOT NULL,
