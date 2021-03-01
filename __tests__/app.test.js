@@ -127,97 +127,103 @@ describe('app routes', () => {
       expect(data.body).toEqual(expectation);
     });
 
-    // test('creates new kit-kat and new kit-kat is in our list', async () => {
-    //   const newKitKat = {
-    //     name: 'Strawberry Kit-Kat',
-    //     description: 'Strawberry chocolate wafers',
-    //     category: 'unique',
-    //     is_flavored: true,
-    //     size: 'regular',
-    //     price: 1,
-    //   };
+    test('creates new kit-kat and new kit-kat is in our list', async () => {
+      const newKitKat = {
+        name: 'Strawberry Kit-Kat',
+        description: 'Strawberry chocolate wafers',
+        category_id: 2,
+        is_flavored: true,
+        size: 'regular',
+        price: 1,
+      };
 
-    //   const expectedKitKat = {
-    //     ...newKitKat,
-    //     id: 7,
-    //     owner_id: 1,
-    //   };
+      const expectedKitKat = {
+        ...newKitKat,
+        id: 7,
+        owner_id: 1,
+      };
 
-    //   const data = await fakeRequest(app)
-    //     .post('/kitkats')
-    //     .send(newKitKat)
-    //     .expect('Content-Type', /json/)
-    //     .expect(200);
+      const data = await fakeRequest(app)
+        .post('/kitkats')
+        .send(newKitKat)
+        .expect('Content-Type', /json/);
+      // .expect(200);
 
-    //   expect(data.body).toEqual(expectedKitKat);
+      expect(data.body).toEqual(expectedKitKat);
 
-    //   const allKitKats = await fakeRequest(app)
-    //     .get('/kitkats')
-    //     .expect('Content-Type', /json/)
-    //     .expect(200);
+      const allKitKats = await fakeRequest(app)
+        .get('/kitkats')
+        .expect('Content-Type', /json/)
+        .expect(200);
 
-    //   const strawberryKitKat = allKitKats.body.find(
-    //     (kitkat) => kitkat.name === 'Strawberry Kit-Kat'
-    //   );
+      const getExpectation = {
+        ...expectedKitKat,
+        category: 'unique',
+      };
 
-    //   expect(strawberryKitKat).toEqual(expectedKitKat);
-    // });
+      expect(allKitKats.body).toContainEqual(getExpectation);
+    });
 
-    // test('updates a kit-kat bar', async () => {
-    //   const newKitKat = {
-    //     name: 'Banana Kit-Kat',
-    //     description: 'Banana chocolate wafers',
-    //     category: 'unique',
-    //     is_flavored: true,
-    //     size: 'regular',
-    //     price: 1,
-    //   };
+    test('updates a kit-kat bar', async () => {
+      const newKitKat = {
+        name: 'Banana Kit-Kat',
+        description: 'Banana chocolate wafers',
+        category_id: 2,
+        is_flavored: true,
+        size: 'regular',
+        price: 1,
+      };
 
-    //   const expectedKitKat = {
-    //     ...newKitKat,
-    //     id: 2,
-    //     owner_id: 1,
-    //   };
+      const expectedKitKat = {
+        name: 'Banana Kit-Kat',
+        description: 'Banana chocolate wafers',
+        category: 'unique',
+        is_flavored: true,
+        size: 'regular',
+        price: 1,
+        owner_id: 1,
+        id: 2,
+      };
 
-    //   await fakeRequest(app)
-    //     .put('/kitkats/2')
-    //     .send(newKitKat)
-    //     .expect('Content-Type', /json/)
-    //     .expect(200);
+      await fakeRequest(app)
+        .put('/kitkats/2')
+        .send(newKitKat)
+        .expect('Content-Type', /json/);
+      // .expect(200);
 
-    //   const updateKitKats = await fakeRequest(app)
-    //     .get('/kitkats/2')
-    //     .expect('Content-Type', /json/)
-    //     .expect(200);
+      const updateKitKats = await fakeRequest(app)
+        .get('/kitkats/2')
+        .expect('Content-Type', /json/)
+        .expect(200);
 
-    //   expect(updateKitKats.body).toEqual(expectedKitKat);
-    // });
+      expect(updateKitKats.body).toEqual(expectedKitKat);
+    });
 
-    // test('deletes a kit-kat with matching id', async () => {
-    //   const expectation = {
-    //     id: 3,
-    //     name: 'Dark-Kit-Kat',
-    //     description: 'Dark Chocolate Wafers',
-    //     category_id: 2,
-    //     is_flavored: true,
-    //     size: 'Regular',
-    //     price: 1,
-    //     owner_id: 1,
-    //   };
+    test('deletes a kit-kat with matching id', async () => {
+      const expectation = {
+        id: 3,
+        name: 'Dark-Kit-Kat',
+        description: 'Dark Chocolate Wafers',
+        category_id: 2,
+        is_flavored: true,
+        size: 'Regular',
+        price: 1,
+        owner_id: 1,
+      };
 
-    //   const data = await fakeRequest(app)
-    //     .delete('/kitkats/3')
-    //     .expect('Content-Type', /json/)
-    //     .expect(200);
+      const data = await fakeRequest(app)
+        .delete('/kitkats/3')
+        .expect('Content-Type', /json/)
+        .expect(200);
 
-    //   expect(data.body).toEqual(expectation);
+      expect(data.body).toEqual(expectation);
 
-    //   const nothing = await fakeRequest(app)
-    //     .get('/kitkats/3')
-    //     .expect('Content-Type', /json/)
-    //     .expect(200);
+      const nothing = await fakeRequest(app)
+        .get('/kitkats/3')
+        .expect('Content-Type', /json/)
+        .expect(200);
 
-    //   expect(nothing.body).toEqual('');
-    // });
+      expect(nothing.body).toEqual('');
+    });
   });
 });
