@@ -1,9 +1,10 @@
 const client = require('../lib/client');
+// import our seed data:
 const { kitkats } = require('./kitkats.js');
 const usersData = require('./users.js');
 const categoriesData = require('./categories.js');
 const { getEmoji } = require('../lib/emoji.js');
-const { getCategoryId } = require('./dataUtils.js');
+const { getCategoryId } = require('../data/dataUtils.js');
 
 run();
 
@@ -24,14 +25,14 @@ async function run() {
       })
     );
 
-    const responses = await Promise.all(
+    const reponses = await Promise.all(
       categoriesData.map((category) => {
         return client.query(
           `
-        INSERT INTO categories (name)
-        VALUES ($1)
-        RETURNING *;
-        `,
+                      INSERT INTO categories (name)
+                      VALUES ($1)
+                      RETURNING *;
+                  `,
           [category.name]
         );
       })
@@ -39,10 +40,10 @@ async function run() {
 
     const user = users[0].rows[0];
 
-    const categories = responses.map(({ rows }) => rows[0]);
+    const categories = reponses.map(({ rows }) => rows[0]);
 
     await Promise.all(
-      kitkats.map((kitkat) => {
+      kitkats.map((kitkats) => {
         const categoryId = getCategoryId(kitkats, categories);
 
         return client.query(
@@ -52,12 +53,12 @@ async function run() {
                     VALUES ($1, $2, $3, $4, $5, $6, $7);
                 `,
           [
-            kitkat.name,
-            kitkat.description,
+            kitkats.name,
+            kitkats.description,
             categoryId,
-            kitkat.is_flavored,
-            kitkat.size,
-            kitkat.price,
+            kitkats.is_flavored,
+            kitkats.size,
+            kitkats.price,
             user.id,
           ]
         );

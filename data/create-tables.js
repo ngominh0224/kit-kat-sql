@@ -17,8 +17,8 @@ async function run() {
                     hash VARCHAR(512) NOT NULL
                 );
                 
-                CREATE TABLE description (
-                  id SERIAL PRIMARY KEY,
+                CREATE TABLE categories (
+                  id SERIAL PRIMARY KEY NOT NULL,
                   name VARCHAR(512) NOT NULL
               );    
                 
@@ -26,7 +26,7 @@ async function run() {
                     id SERIAL PRIMARY KEY NOT NULL,
                     name VARCHAR(512) NOT NULL,
                     description VARCHAR(512) NOT NULL,
-                    category VARCHAR(512) NOT NULL,
+                    category_id INTEGER NOT NULL REFERENCES categories(id),
                     is_flavored BOOLEAN NOT NULL,
                     size VARCHAR(512) NOT NULL, 
                     price INTEGER NOT NULL,
